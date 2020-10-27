@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'ユーザー新規登録' do
-    it "nickname,email,password,password_confirmation,first_name,last_name,
-        first_name_ruby,last_name_ruby,birthdayが存在するとき新規登録できる" do
+    it "nickname,email,password,password_confirmation,first_name,last_name,first_name_ruby,last_name_ruby,birthdayが存在するとき新規登録できる" do
       
     end
     it "nicknameが空だと登録できない" do
