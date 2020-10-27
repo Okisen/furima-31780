@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "新規登録", type: :system do
+RSpec.describe '新規登録', type: :system do
   before do
     @user = FactoryBot.build(:user)
   end
@@ -25,9 +25,9 @@ RSpec.describe "新規登録", type: :system do
       select @user.birthday.month, from: 'user_birthday_2i'
       select @user.birthday.day, from: 'user_birthday_3i'
       # 会員登録ボタンを押すとユーザーモデルのカウントが1上がることを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change{User.count}.by(1)
+      end.to change { User.count }.by(1)
       # トップページに遷移したことを確認する
       expect(current_path).to eq root_path
       # トップページにニックネーム/ログアウトボタンが表示されることを確認する
@@ -36,7 +36,7 @@ RSpec.describe "新規登録", type: :system do
       ).to have_content(@user.nickname)
       expect(
         find('.lists-right').hover
-      ).to have_content("ログアウト")
+      ).to have_content('ログアウト')
       # 新規登録ページ,ログインページへ遷移するボタンが表示されていないことを確認する
       expect(page).to have_no_content('新規登録')
       expect(page).to have_no_content('ログイン')
@@ -51,28 +51,28 @@ RSpec.describe "新規登録", type: :system do
       # 新規登録ページに移動する
       visit new_user_registration_path
       # ユーザー情報を入力する
-      fill_in 'nickname', with: ""
-      fill_in 'email', with: ""
-      fill_in 'password', with: ""
-      fill_in 'password-confirmation', with: ""
-      fill_in 'last-name', with: ""
-      fill_in 'first-name', with: ""
-      fill_in 'last-name-kana', with: ""
-      fill_in 'first-name-kana', with: ""
-      select "--", from: 'user_birthday_1i'
-      select "--", from: 'user_birthday_2i'
-      select "--", from: 'user_birthday_3i'
+      fill_in 'nickname', with: ''
+      fill_in 'email', with: ''
+      fill_in 'password', with: ''
+      fill_in 'password-confirmation', with: ''
+      fill_in 'last-name', with: ''
+      fill_in 'first-name', with: ''
+      fill_in 'last-name-kana', with: ''
+      fill_in 'first-name-kana', with: ''
+      select '--', from: 'user_birthday_1i'
+      select '--', from: 'user_birthday_2i'
+      select '--', from: 'user_birthday_3i'
       # 会員登録ボタンを押してもユーザーモデルのカウントが変わらないことを確認する
-      expect{
+      expect do
         find('input[name="commit"]').click
-      }.to change{User.count}.by(0)
+      end.to change { User.count }.by(0)
       # 新規登録ページに戻されることを確認する
       expect(current_path).to eq user_registration_path
     end
   end
 end
 
-RSpec.describe "ログイン", type: :system do
+RSpec.describe 'ログイン', type: :system do
   before do
     @user = FactoryBot.create(:user)
   end
@@ -97,7 +97,7 @@ RSpec.describe "ログイン", type: :system do
       ).to have_content(@user.nickname)
       expect(
         find('.lists-right').hover
-      ).to have_content("ログアウト")
+      ).to have_content('ログアウト')
       # 新規登録ページ,ログインページへ遷移するボタンが表示されていないことを確認する
       expect(page).to have_no_content('新規登録')
       expect(page).to have_no_content('ログイン')
@@ -112,8 +112,8 @@ RSpec.describe "ログイン", type: :system do
       # ログインページに遷移する
       visit new_user_session_path
       # ユーザー情報を入力する
-      fill_in 'email', with: ""
-      fill_in 'password', with: ""
+      fill_in 'email', with: ''
+      fill_in 'password', with: ''
       # ログインボタンを押す
       click_on('ログイン')
       # ログインページに戻されることを確認する
