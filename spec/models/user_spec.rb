@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
     it "passwordが6文字以上英数字混合だと登録できる" do
-      @user.password = Faker::Internet.password(min_length: 6, max_length: 6, mix_case: true)
+      @user.password = "123abc"
       @user.password_confirmation = @user.password
       expect(@user).to be_valid
     end
