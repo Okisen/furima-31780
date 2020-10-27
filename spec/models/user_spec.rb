@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  before do
-    @user = FactoryBot.build(:user)
-  end
-  describe 'ユーザー新規登録' do
+  describe '#create' do
+    before do
+      @user = FactoryBot.build(:user)
+    end
+
     it "nickname,email,password,password_confirmation,first_name,last_name,first_name_ruby,last_name_ruby,birthdayが存在するとき新規登録できる" do
       expect(@user).to be_valid
     end
@@ -34,6 +35,11 @@ RSpec.describe User, type: :model do
       @user.password_confirmation = @user.password
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+    end
+    it "passwordが6文字以上英数字混合だと登録できる" do
+      @user.password = Faker::Internet.password(min_length: 6, max_length: 6, mix_case: true)
+      @user.password_confirmation = @user.password
+      expect(@user).to be_valid
     end
     it "passwordが半角英数字混合でないと登録できない" do
       @user.password = "123456"
