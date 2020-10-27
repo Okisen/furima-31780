@@ -8,9 +8,9 @@ class Item < ApplicationRecord
     validates :description
     validates :category_id
     validates :state_id
-    validates :delivery_charges_id
+    validates :delivery_charge_id
     validates :delivery_area_id
-    validates :days_id
+    validates :day_id
     validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
   end
 end
