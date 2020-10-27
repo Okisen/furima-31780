@@ -52,7 +52,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("First name can't be blank")
     end
     it "first_nameが全角(漢字,平仮名,カタカナ)でないと登録できない" do
-      @user.first_name = "12345"
+      @user.first_name = Faker::Name.first_name
       @user.valid?
       expect(@user.errors.full_messages).to include("First name is invalid")
     end
@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Last name can't be blank")
     end
     it "last_nameが全角(漢字,平仮名,カタカナ)でないと登録できない" do
-      @user.last_name = "12345"
+      @user.last_name = Faker::Name.last_name
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name is invalid")
     end
@@ -72,7 +72,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("First name ruby can't be blank")
     end
     it "first_name_rubyが全角(カタカナ)でないと登録できない" do
-      @user.first_name_ruby = "12345"
+      @user.first_name_ruby = Faker::Name.first_name
       @user.valid?
       expect(@user.errors.full_messages).to include("First name ruby is invalid")
     end
@@ -82,7 +82,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Last name ruby can't be blank")
     end
     it "last_name_rubyが全角(カタカナ)でないと登録できない" do
-      @user.last_name_ruby = "12345"
+      @user.last_name_ruby = Faker::Name.last_name
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name ruby is invalid")
     end
