@@ -12,11 +12,11 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :description
-    validates :category_id,         numericality: {other_than: 1}
-    validates :state_id,            numericality: {other_than: 1}
-    validates :delivery_charge_id,  numericality: {other_than: 1}
+    validates :category_id,         numericality: {other_than: 1, message: "can't be blank"}
+    validates :state_id,            numericality: {other_than: 1, message: "can't be blank"}
+    validates :delivery_charge_id,  numericality: {other_than: 1, message: "can't be blank"}
     validates :delivery_area_id
-    validates :day_id,              numericality: {other_than: 1}
+    validates :day_id,              numericality: {other_than: 1, message: "can't be blank"}
     validates :price, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
   end
 end
