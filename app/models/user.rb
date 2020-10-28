@@ -14,4 +14,5 @@ class User < ApplicationRecord
   validates :password, format: { with: /[a-z]{1,}/i }
   validates :password, format: { with: /[0-9]{1,}/ }
   has_many :items
+  has_many :trades
 end
