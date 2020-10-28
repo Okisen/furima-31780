@@ -24,8 +24,13 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Description can't be blank")
     end
-    it 'categoryが存在しないと保存できない' do
-      @item.category = nil
+    it 'category_idが存在しないと保存できない' do
+      @item.category_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Category can't be blank")
+    end
+    it 'category_idが1のとき保存できない' do
+      @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
@@ -34,8 +39,18 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("State can't be blank")
     end
+    it 'state_idが1のとき保存できない' do
+      @item.state_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include("State can't be blank")
+    end
     it 'delivery_charge_idが存在しないと保存できない' do
       @item.delivery_charge_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
+    end
+    it 'delivery_charge_idが1のとき保存できない' do
+      @item.delivery_charge_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
     end
@@ -46,6 +61,11 @@ RSpec.describe Item, type: :model do
     end
     it 'day_idが存在しないと保存できない' do
       @item.day_id = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Day can't be blank")
+    end
+    it 'day_idが1のとき保存できない' do
+      @item.day_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Day can't be blank")
     end
