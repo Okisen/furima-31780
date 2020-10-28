@@ -59,10 +59,18 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
     end
-    it 'priceが9999999より大きいとき保存できない' do
+    it 'priceが300以上で保存できる' do
+      @item.price = 300
+      expect(@item).to be_valid
+    end
+    it 'priceが9,999,999より大きいとき保存できない' do
       @item.price = 10_000_000
       @item.valid?
       expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
+    end
+    it 'priceが9,999,999以下で保存できる' do
+      @item.price = 9_999_999
+      expect(@item).to be_valid
     end
     it 'priceが全角数字のとき保存できない' do
       @item.price = '１２３４５'
@@ -75,7 +83,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Price is not a number')
     end
     it 'priceが半角数字のみのとき保存できる' do
-      @item.price = 12_345
+      @item.price = 500
       expect(@item).to be_valid
     end
     it 'userが紐づいていないとき保存できない' do
