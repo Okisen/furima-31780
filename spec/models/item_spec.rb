@@ -11,57 +11,77 @@ RSpec.describe Item, type: :model do
     end
     it 'imageが存在しないと保存できない' do
       @item.image = nil
+      @item.valid?
       expect(@item.errors.full_messages).to include("Image can't be blank")
     end
     it 'nameが存在しないと保存できない' do
       @item.name = nil
+      @item.valid?
       expect(@item.errors.full_messages).to include("Name can't be blank")
     end
     it 'descriptionが存在しないと保存できない' do
       @item.description = nil
+      @item.valid?
       expect(@item.errors.full_messages).to include("Description can't be blank")
     end
     it 'categoryが存在しないと保存できない' do
       @item.category = nil
+      @item.valid?
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
     it 'state_idが存在しないと保存できない' do
       @item.state_id = nil
+      @item.valid?
       expect(@item.errors.full_messages).to include("State can't be blank")
     end
     it 'delivery_charge_idが存在しないと保存できない' do
       @item.delivery_charge_id = nil
+      @item.valid?
       expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
     end
     it 'delivery_area_idが存在しないと保存できない' do
       @item.delivery_area_id = nil
+      @item.valid?
       expect(@item.errors.full_messages).to include("Delivery area can't be blank")
     end
     it 'day_idが存在しないと保存できない' do
       @item.day_id = nil
+      @item.valid?
       expect(@item.errors.full_messages).to include("Day can't be blank")
     end
     it 'priceが存在しないと保存できない' do
       @item.price = nil
+      @item.valid?
       expect(@item.errors.full_messages).to include("Price can't be blank")
     end
     it 'priceが300より小さいとき保存できない' do
-      
+      @item.price = 299
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
     end
     it 'priceが9999999より大きいとき保存できない' do
-      
+      @item.price = 10_000_000
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
     end
     it 'priceが全角数字のとき保存できない' do
-      
+      @item.price = '１２３４５'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is not a number')
     end
     it 'priceが半角英字のとき保存できない' do
-      
+      @item.price = 'abcde'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is not a number')
     end
     it 'priceが半角数字のみのとき保存できる' do
-      
+      @item.price = 12_345
+      expect(@item).to be_valid
     end
     it 'userが紐づいていないとき保存できない' do
-      
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include('User must exist')
     end
   end
 end
