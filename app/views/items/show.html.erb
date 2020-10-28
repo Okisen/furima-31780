@@ -19,7 +19,7 @@
         ¥ <%=@item.price%>
       </span>
       <span class="item-postage">
-        <%= DeliveryCharge.find(@item.delivery_charge_id).charge %>
+        <%= @item.delivery_charge.charge %>
       </span>
     </div>
 
