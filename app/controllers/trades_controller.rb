@@ -3,8 +3,6 @@ class TradesController < ApplicationController
   
   def index
     set_item
-    # binding.pry
-
     if current_user.id == @item.user.id
       redirect_to root_path
     elsif @item.trade != nil
