@@ -1,7 +1,16 @@
 class TradesController < ApplicationController
+  before_action :authenticate_user!, only: :index
+  
   def index
-    @item_trade = ItemTrade.new
     set_item
+    # binding.pry
+
+    if current_user.id == @item.user.id
+      redirect_to root_path
+    elsif @item.trade != nil
+      redirect_to root_path
+    end
+    @item_trade = ItemTrade.new
   end
   def create
     set_item
