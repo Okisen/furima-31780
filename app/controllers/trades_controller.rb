@@ -3,9 +3,9 @@ class TradesController < ApplicationController
 
   def index
     set_item
-    if current_user.id == @item.user.id
+    if !@item.trade.nil?
       redirect_to root_path
-    elsif !@item.trade.nil?
+    elsif current_user.id == @item.user.id
       redirect_to root_path
     end
     @item_trade = ItemTrade.new
