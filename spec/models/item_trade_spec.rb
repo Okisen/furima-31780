@@ -20,17 +20,17 @@ RSpec.describe ItemTrade, type: :model do
       expect(@item_trade.errors.full_messages).to include("Postal code can't be blank")
     end
     it 'postal_codeの4文字目が-でないとき保存できないこと' do
-      @item_trade.postal_code = "1234567"
+      @item_trade.postal_code = '1234567'
       @item_trade.valid?
-      expect(@item_trade.errors.full_messages).to include("Postal code is invalid")
+      expect(@item_trade.errors.full_messages).to include('Postal code is invalid')
     end
     it 'postal_codeが全角数字で入力されている保存できないこと' do
-      @item_trade.postal_code = "１２３-４５６７"
+      @item_trade.postal_code = '１２３-４５６７'
       @item_trade.valid?
-      expect(@item_trade.errors.full_messages).to include("Postal code is invalid")
+      expect(@item_trade.errors.full_messages).to include('Postal code is invalid')
     end
     it 'postal_codeが半角数字3,-,半角数字4の並びで入力されていると保存できること' do
-      @item_trade.postal_code = "123-4567"
+      @item_trade.postal_code = '123-4567'
       expect(@item_trade).to be_valid
     end
     it 'prefecture_idが空だと保存できないこと' do
@@ -58,17 +58,17 @@ RSpec.describe ItemTrade, type: :model do
       expect(@item_trade.errors.full_messages).to include("Phone number can't be blank")
     end
     it 'phone_numberが全角数字だと保存できないこと' do
-      @item_trade.phone_number = "０９０１２３４５６７８"
+      @item_trade.phone_number = '０９０１２３４５６７８'
       @item_trade.valid?
-      expect(@item_trade.errors.full_messages).to include("Phone number is invalid")
+      expect(@item_trade.errors.full_messages).to include('Phone number is invalid')
     end
     it 'phone_numberが12字以上だと保存できないこと' do
-      @item_trade.phone_number = "090123456789012345"
+      @item_trade.phone_number = '090123456789012345'
       @item_trade.valid?
-      expect(@item_trade.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+      expect(@item_trade.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
     end
     it 'phone_numberが半角数字11文字だと保存できること' do
-      @item_trade.phone_number = "09012345678"
+      @item_trade.phone_number = '09012345678'
       expect(@item_trade).to be_valid
     end
   end
