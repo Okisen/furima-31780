@@ -6,7 +6,8 @@ class ItemTrade
     validates :prefecture_id
     validates :city
     validates :address_number
-    validates :phone_number, format:{ with:/\A\d+\z/}
+    validates :phone_number, format:{ with:/\A\d+\z/, maxlength: 11}
+    validates :phone_number, length: {maximum: 11}
     validates :token
   end
   def save
