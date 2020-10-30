@@ -2,9 +2,7 @@ class TradesController < ApplicationController
   before_action :authenticate_user!, only: :index
   before_action :set_item
   def index
-    if !@item.trade.nil? || current_user.id == @item.user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if !@item.trade.nil? || current_user.id == @item.user.id
     @item_trade = ItemTrade.new
   end
 
